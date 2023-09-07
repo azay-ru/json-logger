@@ -4,6 +4,9 @@ namespace Azay\Log;
 
 use Psr\Log\AbstractLogger;
 
+/**
+ * One of the simplest implementations PSR-3 compatible Json logger
+ */
 class JsonLogger extends AbstractLogger
 {
     const DEFAULT_OPTIONS = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE;
@@ -16,6 +19,12 @@ class JsonLogger extends AbstractLogger
     private $timeFormat;
     private $break;
 
+    /**
+     * @param string $filename
+     * @param int $options JSON decoding options
+     * @param string $timeFormat Time format ,
+     * @param bool $insertBreaks Insert breaks line after each record
+     */
     public function __construct(string $filename, int $options = self::DEFAULT_OPTIONS, string $timeFormat = self::DEFAULT_TIME_FORMAT, bool $insertBreaks = false)
     {
         $this->filename = $filename . (empty(pathinfo($filename, PATHINFO_EXTENSION)) ? '.json' : '');

@@ -1,12 +1,13 @@
-# Tiny PSR-3 compatible Json logger
+# One of the simplest implementations PSR-3 compatible logger
 
 ## Requirements
 
 - PHP 7 or greater
 - Json extension
 
-## Limitations PSR-3 support
-Not support direct call "log" method, use instead "info", "warning" etc.
+## Limitations
+- Output Json format
+- Not support direct call "log" method, use instead "info", "warning" etc.
 
 ## Installation
 
