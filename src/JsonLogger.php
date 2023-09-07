@@ -25,7 +25,7 @@ class JsonLogger extends AbstractLogger
      * @param string $timeFormat Time format ,
      * @param bool $insertBreaks Insert breaks line after each record
      */
-    public function __construct(string $filename, int $options = self::DEFAULT_OPTIONS, string $timeFormat = self::DEFAULT_TIME_FORMAT, bool $insertBreaks = false)
+    public function __construct(string $filename, int $options = self::DEFAULT_OPTIONS, string $timeFormat = self::DEFAULT_TIME_FORMAT, bool $insertBreaks = true)
     {
         $this->filename = $filename . (empty(pathinfo($filename, PATHINFO_EXTENSION)) ? '.json' : '');
         $this->options = $options;
@@ -35,13 +35,15 @@ class JsonLogger extends AbstractLogger
             : '';
     }
 
-    public function log($level, $message, array $context = [])
+    public function log($level, $message='', array $context = [])
     {
         $record = [
             'time' => date($this->timeFormat),
             'level' => $level,
-            'message' => $message,
         ];
+
+        if (!empty($message))
+            $record['message'] = $message;
 
         foreach ($context as $key => $value) {
             $recordKey = array_key_exists($key, $record)
