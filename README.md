@@ -66,7 +66,8 @@ $logger->debug(
 );
 ```
 
-### Output `/tmp/logger.json`
+### Output
+file `/tmp/logger.json`
 ```json
 {"time":"2023-10-19 11:29:34","level":"info","message":"Info message for json logger","Foo":"Bar"}
 ```
