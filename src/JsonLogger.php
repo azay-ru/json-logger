@@ -19,6 +19,7 @@ class JsonLogger extends AbstractLogger
     const NOTICE = 5;
     const INFO = 6;
     const DEBUG = 7;
+
     const LEVELS = [
             self::EMERGENCY => LogLevel::EMERGENCY,
             self::ALERT     => LogLevel::ALERT,
@@ -30,7 +31,7 @@ class JsonLogger extends AbstractLogger
             self::DEBUG     => LogLevel::DEBUG
     ];
 
-    const DEFAULT_OPTIONS = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE;
+    const DEFAULT_JSON_OPTIONS = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE;
     const DEFAULT_TIME_FORMAT = 'Y-m-d H:i:s';
     const BREAKS = "\n";
     const DUPLICATE_PREFIX = 'context_';
@@ -58,14 +59,14 @@ class JsonLogger extends AbstractLogger
 
     /**
      * @param string $filename
-     * @param int    $options      JSON decoding options
+     * @param int    $jsonOptions  JSON decoding options
      * @param string $timeFormat   Time format ,
      * @param bool   $insertBreaks Insert breaks line after each record
      */
-    public function __construct(string $filename, int $options = self::DEFAULT_OPTIONS, string $timeFormat = self::DEFAULT_TIME_FORMAT, bool $insertBreaks = true)
+    public function __construct(string $filename, int $jsonOptions = self::DEFAULT_JSON_OPTIONS, string $timeFormat = self::DEFAULT_TIME_FORMAT, bool $insertBreaks = true)
     {
         $this->filename = $filename . (empty(pathinfo($filename, PATHINFO_EXTENSION)) ? '.json':'');
-        $this->options = $options;
+        $this->options = $jsonOptions;
         $this->timeFormat = $timeFormat;
         $this->break = $insertBreaks
                 ? self::BREAKS
@@ -118,8 +119,9 @@ class JsonLogger extends AbstractLogger
             $lower = strtolower($level);
             $index = array_search($lower, self::LEVELS);
 
-            if ($index === false)
+            if ($index===false) {
                 throw new InvalidArgumentException('Level "' . $level . '" is not defined');
+            }
 
             return $index;
         }

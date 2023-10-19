@@ -31,13 +31,14 @@ Logger supports the logging levels described by [RFC 5424](https://datatracker.i
 |   7    |Debug|debug-level messages|`debug`| DEBUG       |
 
 ## Usage
+
 ```php
 use Azay\Log\JsonLogger;
 
 $logger = new JsonLogger(
     '/tmp/log',
-    JsonLogger::DEFAULT_OPTIONS,
-    JsonLogger::DEFAULT_TIME_FORMAT
+    JsonLogger::DEFAULT_JSON_OPTIONS,  // JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+    JsonLogger::DEFAULT_TIME_FORMAT    // 'Y-m-d H:i:s'
 );
 
 //Optional, set maximum severity level, default `debug`
