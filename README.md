@@ -5,9 +5,8 @@
 - PHP 7 or greater
 - Json extension
 
-## Limitations
-- Output Json format
-- Not support direct call "log" method, use instead "info", "warning" etc.
+## Feature
+- JSON output format
 
 ## Installation
 
