@@ -33,10 +33,14 @@ Logger supports the logging levels described by [RFC 5424](https://datatracker.i
 ## Usage
 
 ```php
+<?php
+
 use Azay\Log\JsonLogger;
 
+require_once __DIR__ . '/vendor/autoload.php';
+
 $logger = new JsonLogger(
-    '/tmp/log',
+    '/tmp/logger',
     JsonLogger::DEFAULT_JSON_OPTIONS,  // JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
     JsonLogger::DEFAULT_TIME_FORMAT    // 'Y-m-d H:i:s'
 );
@@ -62,7 +66,7 @@ $logger->debug(
 );
 ```
 
-### Output
+### Output `/tmp/logger.json`
 ```json
 {"time":"2023-10-19 11:29:34","level":"info","message":"Info message for json logger","Foo":"Bar"}
 ```
